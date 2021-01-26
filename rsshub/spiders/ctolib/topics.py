@@ -4,7 +4,7 @@ domain = 'https://www.ctolib.com'
 
 
 def parse(post):
-    item = {}
+    item = dict()
     item['title'] = post.css('a.title::text').extract_first()
     item['description'] = post.css('p.abstract::text').extract_first()
     item['link'] = f"{domain}{post.css('a.title::attr(href)').extract_first()}"

@@ -4,7 +4,7 @@ domain = 'https://chuansongme.com'
 
 
 def parse(post):
-    item = {}
+    item = dict()
     item['title'] = post.css('a.question_link::text').extract()[-1].strip()
     link = f"{domain}{post.css('a.question_link::attr(href)').extract_first()}"
     item['link'] = link

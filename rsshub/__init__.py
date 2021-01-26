@@ -7,6 +7,7 @@ from rsshub.config import config
 from rsshub.extensions import *
 from rsshub.blueprints.main import bp as main_bp
 from rsshub.utils import XMLResponse
+from rsshub.cache import cache
 
 
 def create_app(config_name=None):
@@ -16,6 +17,7 @@ def create_app(config_name=None):
     app = Flask(__name__)
     app.config.from_object(config[config_name])
     app.response_class = XMLResponse
+    cache.init_app(app)
 
     register_blueprints(app)
     register_extensions(app)

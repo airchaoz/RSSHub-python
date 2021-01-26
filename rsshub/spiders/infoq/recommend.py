@@ -5,7 +5,7 @@ domain = 'https://www.infoq.cn'
 
 
 def parse(post):
-    item = {}
+    item = dict()
     item['title'] = post['article_title']
     item['description'] = f"{post['article_summary']}<br><img referrerpolicy='no-referrer' src={post.get('article_cover')}>"
     item['link'] = f"{domain}/article/{post['uuid']}"

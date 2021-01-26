@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request
+from rsshub.cache import cache
 
 bp = Blueprint('main', __name__)
 
@@ -46,7 +47,15 @@ def ctolib_topics(category=''):
     return render_template('main/atom.xml', **filter_content(ctx(category)))
 
 
-@bp.route('/infoq/recommend')
-def infoq_recommend():
-    from rsshub.spiders.infoq.recommend import ctx
-    return render_template('main/atom.xml', **filter_content(ctx()))
+@bp.route('/ecut/snse')
+@cache.cached()
+def etuc_snse(category=''):
+    from rsshub.spiders.ecut.snse import ctx
+    return render_template('main/atom.xml', **filter_content(ctx(category)))
+
+
+@bp.route('/bjx/newlist')
+@cache.cached()
+def bjx_newlist(category='NewsList'):
+    from rsshub.spiders.nuclearpower.newlist import ctx
+    return render_template('main/atom.xml', **filter_content(ctx(category)))
