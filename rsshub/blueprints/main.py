@@ -57,5 +57,5 @@ def etuc_snse(category=''):
 @bp.route('/bjx/newlist')
 @cache.cached()
 def bjx_newlist(category='NewsList'):
-    from rsshub.spiders.nuclearpower.newlist import ctx
+    from rsshub.spiders.nuclearpower.bjx_newlist import ctx
     return render_template('main/atom.xml', **filter_content(ctx(category)))
