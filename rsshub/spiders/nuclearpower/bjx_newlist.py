@@ -5,8 +5,9 @@ domain = 'https://hedian.bjx.com.cn/'
 
 def parse(post):
     item = dict()
-    item['title'] = post.xpath('@title').extract_first()
-    item['link'] = post.xpath('@href').extract_first()
+    item['title'] = post.xpath('a/@title').extract_first()
+    item['link'] = post.xpath('a/@href').extract_first()
+    item['pubDate'] = post.xpath('span/text()').extract_first()
     item['description'] = parse_full_text(item['link'])
     return item
 
@@ -22,7 +23,7 @@ def parse_full_text(url):
 def ctx(category='NewsList'):
     tree = fetch(f'{domain}{category}', coderule='gbk')
     # posts = tree.css('#wp_news_w6 > table > tbody > tr')
-    posts = tree.xpath('//ul[@class="list_left_ul"]//a')
+    posts = tree.xpath('//ul[@class="list_left_ul"]//a/parent::li')
     return {
         'title': '北极星核电网-要闻',
         'link': f'{domain}{category}',
@@ -30,3 +31,7 @@ def ctx(category='NewsList'):
         'author': 'airchaoz',
         'items': list(map(parse, posts))
     }
+
+
+if __name__ == '__main__':
+    a = ctx()

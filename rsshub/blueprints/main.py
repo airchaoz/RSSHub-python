@@ -59,3 +59,10 @@ def etuc_snse(category=''):
 def bjx_newlist(category='NewsList'):
     from rsshub.spiders.nuclearpower.bjx_newlist import ctx
     return render_template('main/atom.xml', **filter_content(ctx(category)))
+
+
+@bp.route('/gzjy/dili')
+@cache.cached()
+def gzjy_dili():
+    from rsshub.spiders.gzjy.dili import ctx
+    return render_template('main/atom.xml', **filter_content(ctx()))
