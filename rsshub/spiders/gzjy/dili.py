@@ -40,7 +40,7 @@ def get_info():
 def parse(post):
     item = dict()
     item['title'] = post['officename']
-    item['link'] = "127.0.0.1"
+    item['link'] = post['id']
     item['pubDate'] = post['createTime']
     item['description'] = ''
     return item
