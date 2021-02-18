@@ -14,7 +14,7 @@ class XMLResponse(Response):
         return super().__init__(response, **kwargs)
 
 
-def fetch(url: str, headers=None, proxies: dict = None, coderule: str = "utf-8"):
+def fetch(url: str, headers=None, proxies: dict = None, coderule: str = ""):
     if headers is None:
         headers = DEFAULT_HEADERS
     # if coderule is None:
@@ -25,6 +25,9 @@ def fetch(url: str, headers=None, proxies: dict = None, coderule: str = "utf-8")
     except Exception as e:
         print(f'[Err] {e}')
     else:
-        html = res.content.decode(coderule)
+        if coderule == "":
+            html = res.text
+        else:
+            html = res.content.decode(coderule)
         tree = Selector(html)
         return tree

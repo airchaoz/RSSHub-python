@@ -13,7 +13,7 @@ def parse(post):
 
 
 def parse_full_text(url):
-    tree = fetch(f'{url}', coderule='gbk')
+    tree = fetch(f'{url}')
     content = tree.xpath('//div[@class="oiuxclelk"]/following-sibling::div[1]').get()
     if len(content) <= 40 or '下一页' in content:
         content = "\n".join(tree.xpath('//div[@class="oiuxclelk"]/following-sibling::p').getall())
@@ -21,7 +21,7 @@ def parse_full_text(url):
 
 
 def ctx(category='NewsList'):
-    tree = fetch(f'{domain}{category}', coderule='gbk')
+    tree = fetch(f'{domain}{category}', coderule='gb2312')
     # posts = tree.css('#wp_news_w6 > table > tbody > tr')
     posts = tree.xpath('//ul[@class="list_left_ul"]//a/parent::li')
     return {
@@ -33,5 +33,3 @@ def ctx(category='NewsList'):
     }
 
 
-if __name__ == '__main__':
-    a = ctx()
